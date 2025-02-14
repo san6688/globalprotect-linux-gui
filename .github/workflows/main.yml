@@ -25,18 +25,19 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: npm run build
 
+      - name: Create Tag
+        id: tag
+        run: |
+          TAG_NAME=v1.${{ github.run_number }}
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+
       - name: release
         uses: softprops/action-gh-release@v1
         with:
-          draft: true
-          files: |            
-            dist/*.dmg
-            dist/*.AppImage
-            dist/*.snap
-            dist/*.deb
-            dist/*.rpm
-            dist/*.tar.gz
-            dist/*.yml
-            dist/*.blockmap
+          tag_name: ${{ steps.tag.outputs.TAG_NAME }}
+          draft: false
+          files: |
+            dist/*.snap            
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
