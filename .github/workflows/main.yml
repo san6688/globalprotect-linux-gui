@@ -29,6 +29,7 @@ jobs:
         id: tag
         run: |
           TAG_NAME=v1.${{ github.run_number }}
+          echo "::set-output name=TAG_NAME::$TAG_NAME"
           git tag $TAG_NAME
           git push origin $TAG_NAME
         env:
@@ -40,6 +41,7 @@ jobs:
           tag_name: ${{ steps.tag.outputs.TAG_NAME }}
           draft: false
           files: |
-            dist/*.snap            
+            dist/*.snap
+            dist/*.AppImage
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
