@@ -12,7 +12,7 @@ asarUnpack:
   - resources/**
 linux:
   target:    
-    - snap    
+    - deb    
   icon: build/icons/icon.png
   maintainer: electronjs.org
   category: Utility
