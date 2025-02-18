@@ -11,8 +11,7 @@ files:
 asarUnpack:
   - resources/**
 linux:
-  target:
-    - AppImage
+  target:    
     - snap    
   icon: build/icons/icon.png
   maintainer: electronjs.org
